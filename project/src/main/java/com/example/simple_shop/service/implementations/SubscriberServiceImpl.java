@@ -1,15 +1,17 @@
 package com.example.simple_shop.service.implementations;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.simple_shop.entity.Product;
 import com.example.simple_shop.entity.Subscriber;
 import com.example.simple_shop.repository.SubscriberRepository;
+import com.example.simple_shop.service.interfaces.ProductService;
 import com.example.simple_shop.service.interfaces.SubscriberService;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -18,12 +20,14 @@ public class SubscriberServiceImpl implements SubscriberService {
  
     private SubscriberRepository subRepo;
 
+    private ProductService productService;
+
     @Override
     public Subscriber saveSubscriber(Subscriber subscriber) {
         checkSubscriberFields(subscriber);
             
         // Assume initial subscriber does not have products yet
-        subscriber.setSubscribedProducts(null);
+        subscriber.setSubscribedProducts(new ArrayList<>());
         // Set current date
         subscriber.setJoinDate(new Date());
         return subRepo.save(subscriber);
@@ -41,15 +45,20 @@ public class SubscriberServiceImpl implements SubscriberService {
     }
 
     @Override
-    public void addProductToSubsciber(Long subscriberID, Long productID) {
+    public void addProductToSubscriber(Long subscriberID, Long productID) {
         if (subscriberID == null) {
             throw new IllegalArgumentException("Subscriber ID cannot be null!");
         } else if (productID == null) {
             throw new IllegalArgumentException("Product ID cannot be null!");
         }
 
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addProductToSubsciber'");
+        Product productDB = productService.getProductByID(productID);
+
+        Subscriber subscriberDB = getSubscriberByID(subscriberID);
+
+        // Update data in db
+        subscriberDB.getSubscribedProducts().add(productDB);
+        subRepo.save(subscriberDB);
     }
 
     @Override
@@ -61,7 +70,6 @@ public class SubscriberServiceImpl implements SubscriberService {
         return subRepo.getSubsribersByProductID(productID);
     }
 
-    @Transactional
     @Override
     public Subscriber updateSubscriber(Long subscriberID, Subscriber newSubscriberData) {
         if (subscriberID == null) {
@@ -77,7 +85,7 @@ public class SubscriberServiceImpl implements SubscriberService {
         // Update data in db
         dbSub.setFirstName(newSubscriberData.getFirstName());
         dbSub.setLastName(newSubscriberData.getLastName());
-        return dbSub;
+        return subRepo.save(dbSub);
     }
 
     @Override

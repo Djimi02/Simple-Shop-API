@@ -1,5 +1,6 @@
 package com.example.simple_shop.service.implementations;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
         checkProductFields(product);
 
         // Assume initial product cannot have subscribers
-        product.setSubscibers(null);
+        product.setSubscibers(new ArrayList<>());
         // Set current date
         product.setCreationDate(new Date());
         return prodRepo.save(product);
@@ -67,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
         return dbProd;
     }
 
+    @Transactional
     @Override
     public void deleteProductByID(Long productID) {
         if (productID == null) {
@@ -74,6 +76,9 @@ public class ProductServiceImpl implements ProductService {
         } else if (!prodRepo.existsById(productID)) {
             throw new IllegalArgumentException(String.format("Product with id = %2d does not exist!", productID));
         }
+
+        prodRepo.deleteAllReferencesInTheMappingTable(productID);
+
         prodRepo.deleteById(productID);
     }
 

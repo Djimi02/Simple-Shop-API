@@ -1,5 +1,6 @@
 package com.example.simple_shop.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,6 @@ public class Subscriber {
         joinColumns = @JoinColumn(name = "subscriber_id"), 
         inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> subscribedProducts;
+    private List<Product> subscribedProducts = new ArrayList<>();
     
 }

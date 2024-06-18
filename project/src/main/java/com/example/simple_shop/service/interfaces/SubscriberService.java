@@ -10,7 +10,7 @@ public interface SubscriberService {
 
     public Subscriber getSubscriberByID(Long subscriberID);
     
-    public void addProductToSubsciber(Long subscriberID, Long productID);
+    public void addProductToSubscriber(Long subscriberID, Long productID);
 
     public List<Subscriber> getSubsribersByProductID(Long productID);
 

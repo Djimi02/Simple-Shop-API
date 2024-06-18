@@ -2,18 +2,25 @@ package com.example.simple_shop.service.implementations;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.simple_shop.entity.Product;
+import com.example.simple_shop.entity.Subscriber;
 import com.example.simple_shop.service.interfaces.ProductService;
+import com.example.simple_shop.service.interfaces.SubscriberService;
 
 @SpringBootTest
 public class ProductServiceImplTest {
 
     @Autowired
     private ProductService service;
+
+    @Autowired
+    private SubscriberService subscriberService;
 
     @Test
     void testSaveProductCorrect() {
@@ -99,8 +106,53 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void testGetProductsBySubscriberID() {
+    void testGetProductsBySubscriberIDCorrect() {
+        Subscriber subscriber = createAndSaveValidSubscriber();
 
+        Product product1 = createAndSaveValidProduct();
+        Product product2 = createAndSaveValidProduct();
+
+        // Update data
+        subscriberService.addProductToSubscriber(subscriber.getId(), product1.getId());
+        subscriberService.addProductToSubscriber(subscriber.getId(), product2.getId());
+
+        // Retrieve data
+        List<Product> productsBySubscriberID = service.getProductsBySubscriberID(subscriber.getId());
+
+        // Check
+        assertTrue(productsBySubscriberID.size() == 2);
+
+        // Delete products and subscriber after test
+        service.deleteProductByID(product1.getId());
+        service.deleteProductByID(product2.getId());
+        subscriberService.deleteSubscriberByID(subscriber.getId());
+    }
+
+    @Test
+    void testGetProductsBySubscriberIDIncorrect() {
+        // Null product id
+        try {
+            service.getProductsBySubscriberID(null);
+            // Should have thrown exception
+            assertTrue(false);
+        } catch (IllegalArgumentException e) {
+            // Correct exception
+            assertTrue(true);
+        } catch (Exception e) {
+            // Incorrect exception
+            assertTrue(false);
+        }
+
+        // Test with non-existing subscriber
+        List<Product> productsBySubscriberID = service.getProductsBySubscriberID(-1l);
+        assertTrue(productsBySubscriberID.size() == 0);
+    }
+
+    private Subscriber createAndSaveValidSubscriber() {
+        Subscriber subscriber = new Subscriber();
+        subscriber.setFirstName("fName");
+        subscriber.setLastName("lName");
+        return subscriberService.saveSubscriber(subscriber);
     }
 
     @Test

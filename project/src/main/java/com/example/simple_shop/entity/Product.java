@@ -1,5 +1,6 @@
 package com.example.simple_shop.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,6 @@ public class Product {
     private boolean isAvailable;
 
     @ManyToMany(mappedBy = "subscribedProducts", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    private List<Subscriber> subscibers;
+    private List<Subscriber> subscibers = new ArrayList<>();
 
 }

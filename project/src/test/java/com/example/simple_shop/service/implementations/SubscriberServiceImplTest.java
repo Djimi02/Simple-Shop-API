@@ -2,11 +2,15 @@ package com.example.simple_shop.service.implementations;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.simple_shop.entity.Product;
 import com.example.simple_shop.entity.Subscriber;
+import com.example.simple_shop.service.interfaces.ProductService;
 import com.example.simple_shop.service.interfaces.SubscriberService;
 
 @SpringBootTest
@@ -14,6 +18,9 @@ public class SubscriberServiceImplTest {
 
     @Autowired
     private SubscriberService service;
+
+    @Autowired
+    private ProductService productService;
 
     @Test
     void testSaveSubscriberCorrect() {
@@ -103,8 +110,47 @@ public class SubscriberServiceImplTest {
     }
 
     @Test
-    void testAddProductToSubsciber() {
-        
+    void testAddProductToSubsciberCorrect() {
+        Subscriber subscriber = createAndSaveValidSubscriber();
+
+        Product product = createAndSaveValidProduct();
+
+        // Initially empty
+        assertTrue(product.getSubscibers().size() == 0);
+        assertTrue(subscriber.getSubscribedProducts().size() == 0);
+
+        service.addProductToSubscriber(subscriber.getId(), product.getId());
+
+        Product dbProduct = productService.getProductByID(product.getId());
+        Subscriber dbSub = service.getSubscriberByID(subscriber.getId());
+
+        // Should map to each other
+        assertTrue(dbProduct.getSubscibers().size() == 1);
+        assertTrue(dbSub.getSubscribedProducts().size() == 1);
+
+        // Delete product and subscriber after test
+        service.deleteSubscriberByID(subscriber.getId());
+        productService.deleteProductByID(product.getId());
+    }
+
+    @Test
+    void testAddProductToSubsciberIncorrect() {
+        // Adding non-existing product to non-existing subscriber
+        try {
+            service.addProductToSubscriber(-1l, -1l);
+        } catch (IllegalArgumentException e) {
+            // Correct exception
+            assertTrue(true);
+        } catch (Exception e) {
+            // Incorrect exception
+            assertTrue(false);
+        }
+    }
+
+    private Product createAndSaveValidProduct() {
+        Product product = new Product();
+        product.setName("pName");
+        return productService.saveProduct(product);
     }
 
     @Test
@@ -133,8 +179,46 @@ public class SubscriberServiceImplTest {
     }
 
     @Test
-    void testGetSubsribersByProductID() {
+    void testGetSubsribersByProductIDCorrect() {
+        Product product = createAndSaveValidProduct();
 
+        Subscriber subscriber1 = createAndSaveValidSubscriber();
+        Subscriber subscriber2 = createAndSaveValidSubscriber();
+
+        // Update data
+        service.addProductToSubscriber(subscriber1.getId(), product.getId());
+        service.addProductToSubscriber(subscriber2.getId(), product.getId());
+
+        // Retrieve data from db
+        List<Subscriber> subsribersByProductID = service.getSubsribersByProductID(product.getId());
+
+        // Check
+        assertTrue(subsribersByProductID.size() == 2);
+
+        // Delete product and subscribers after test
+        productService.deleteProductByID(product.getId());
+        service.deleteSubscriberByID(subscriber1.getId());
+        service.deleteSubscriberByID(subscriber2.getId());
+    }
+
+    @Test
+    void testGetSubsribersByProductIDIncorrect() {
+        // Null product id
+        try {
+            service.getSubsribersByProductID(null);
+            // Should have thrown exception
+            assertTrue(false);
+        } catch (IllegalArgumentException e) {
+            // Correct exception
+            assertTrue(true);
+        } catch (Exception e) {
+            // Incorrect exception
+            assertTrue(false);
+        }
+
+        // Testing with non-existing product
+        List<Subscriber> subsribersByProductID = service.getSubsribersByProductID(-1l);
+        assertTrue(subsribersByProductID.size() == 0);
     }
 
     @Test
