@@ -18,4 +18,6 @@ public interface SubscriberService {
 
     public void deleteSubscriberByID(Long subscriberID);
 
+    public boolean subscriberExistsByID(Long subscriberID);
+
 }
