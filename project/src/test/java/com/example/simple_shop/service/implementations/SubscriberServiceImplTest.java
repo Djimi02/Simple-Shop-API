@@ -77,10 +77,7 @@ public class SubscriberServiceImplTest {
     @Test
     void testGetSubscriberByIDCorrect() {
         // First save subscriber
-        Subscriber subscriber = new Subscriber();
-        subscriber.setFirstName("fName");
-        subscriber.setLastName("lName");
-        Long subID = service.saveSubscriber(subscriber).getId();
+        Long subID = createAndSaveValidSubscriber().getId();
 
         try {
             service.getSubscriberByID(subID);
