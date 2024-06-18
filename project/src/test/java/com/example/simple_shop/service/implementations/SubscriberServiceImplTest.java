@@ -1,4 +1,4 @@
-package com.example.simple_shop.service;
+package com.example.simple_shop.service.implementations;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
