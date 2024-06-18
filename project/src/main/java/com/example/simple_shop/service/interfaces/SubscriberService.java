@@ -6,7 +6,7 @@ import com.example.simple_shop.entity.Subscriber;
 
 public interface SubscriberService {
     
-    public Subscriber addSubscriber(Subscriber subscriber);
+    public Subscriber saveSubscriber(Subscriber subscriber);
 
     public Subscriber getSubscriberByID(Long subscriberID);
     

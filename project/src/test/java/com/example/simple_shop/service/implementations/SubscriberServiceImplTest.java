@@ -16,14 +16,14 @@ public class SubscriberServiceImplTest {
     private SubscriberService service;
 
     @Test
-    void testAddSubscriberCorrect() {
+    void testSaveSubscriberCorrect() {
         Subscriber subscriber = new Subscriber();
         subscriber.setFirstName("fName");
         subscriber.setLastName("lName");
 
         assertTrue(subscriber.getId() == 0);
 
-        subscriber = service.addSubscriber(subscriber);
+        subscriber = service.saveSubscriber(subscriber);
 
         assertTrue(subscriber.getId() > 0);
 
@@ -32,10 +32,10 @@ public class SubscriberServiceImplTest {
     }
 
     @Test
-    void testAddSubscriberIncorrect() {
+    void testSaveSubscriberIncorrect() {
         // Subscriber is null
         try {
-            service.addSubscriber(null);
+            service.saveSubscriber(null);
         } catch (IllegalArgumentException e) { // Correct exception
             assertTrue(true);
         } catch (Exception e) {
@@ -47,7 +47,7 @@ public class SubscriberServiceImplTest {
             Subscriber subscriber = new Subscriber();
             subscriber.setLastName("lName");
 
-            service.addSubscriber(subscriber);
+            service.saveSubscriber(subscriber);
         } catch (IllegalArgumentException e) {
             assertTrue(true);
         } catch (Exception e) {
@@ -59,7 +59,7 @@ public class SubscriberServiceImplTest {
             Subscriber subscriber = new Subscriber();
             subscriber.setFirstName("fName");
 
-            service.addSubscriber(subscriber);
+            service.saveSubscriber(subscriber);
         } catch (IllegalArgumentException e) { // Correct exception
             assertTrue(true);
         } catch (Exception e) {
@@ -71,7 +71,7 @@ public class SubscriberServiceImplTest {
         Subscriber subscriber = new Subscriber();
         subscriber.setFirstName("fName");
         subscriber.setLastName("lName");
-        return service.addSubscriber(subscriber);
+        return service.saveSubscriber(subscriber);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class SubscriberServiceImplTest {
         Subscriber subscriber = new Subscriber();
         subscriber.setFirstName("fName");
         subscriber.setLastName("lName");
-        Long subID = service.addSubscriber(subscriber).getId();
+        Long subID = service.saveSubscriber(subscriber).getId();
 
         try {
             service.getSubscriberByID(subID);

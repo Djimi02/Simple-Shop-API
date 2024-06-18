@@ -19,7 +19,7 @@ public class SubscriberServiceImpl implements SubscriberService {
     private SubscriberRepository subRepo;
 
     @Override
-    public Subscriber addSubscriber(Subscriber subscriber) {
+    public Subscriber saveSubscriber(Subscriber subscriber) {
         checkSubscriberFields(subscriber);
             
         // Assume initial subscriber does not have products yet
