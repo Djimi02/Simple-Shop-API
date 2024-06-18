@@ -3,8 +3,10 @@ package com.example.simple_shop.entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -33,7 +35,7 @@ public class Subscriber {
     @Column(nullable = false)
     private Date joinDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
         name = "subscriber_product", 
         joinColumns = @JoinColumn(name = "subscriber_id"), 

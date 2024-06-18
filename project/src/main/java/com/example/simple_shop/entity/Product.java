@@ -3,8 +3,10 @@ package com.example.simple_shop.entity;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -31,7 +33,7 @@ public class Product {
     @Column(nullable = false)
     private boolean isAvailable;
 
-    @ManyToMany(mappedBy = "subscribedProducts")
+    @ManyToMany(mappedBy = "subscribedProducts", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Subscriber> subscibers;
 
 }
