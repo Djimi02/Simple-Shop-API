@@ -1,11 +1,15 @@
 package com.example.simple_shop.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,5 +32,13 @@ public class Subscriber {
 
     @Column(nullable = false)
     private Date joinDate;
+
+    @ManyToMany
+    @JoinTable(
+        name = "subscriber_product", 
+        joinColumns = @JoinColumn(name = "subscriber_id"), 
+        inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> subscribedProducts;
     
 }

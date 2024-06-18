@@ -1,11 +1,13 @@
 package com.example.simple_shop.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,5 +30,8 @@ public class Product {
 
     @Column(nullable = false)
     private boolean isAvailable;
+
+    @ManyToMany(mappedBy = "subscribedProducts")
+    private List<Subscriber> subscibers;
 
 }
