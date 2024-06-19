@@ -25,7 +25,7 @@ public class ProductServiceImplTest {
     @Test
     void testSaveProductCorrect() {
         Product product = new Product();
-        product.setAvailable(false);
+        product.setIsAvailable(false);
         product.setName("pName");
 
         assertTrue(product.getId() == 0);
@@ -69,7 +69,7 @@ public class ProductServiceImplTest {
 
     private Product createAndSaveValidProduct() {
         Product product = new Product();
-        product.setAvailable(false);
+        product.setIsAvailable(false);
         product.setName("pName");
         return service.saveProduct(product);
     }

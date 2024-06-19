@@ -65,6 +65,7 @@ public class ProductServiceImpl implements ProductService {
 
         // Update data in db
         dbProd.setName(newProductData.getName());
+        dbProd.setIsAvailable(newProductData.getIsAvailable());
         return prodRepo.save(dbProd);
     }
 
@@ -87,6 +88,8 @@ public class ProductServiceImpl implements ProductService {
             throw new IllegalArgumentException("Product cannot be null!");
         } else if (product.getName() == null) {
             throw new IllegalArgumentException("Product name cannot be null!");
+        } else if (product.getIsAvailable() == null) {
+            throw new IllegalArgumentException("Product availability cannot be null!");
         }
     }
     

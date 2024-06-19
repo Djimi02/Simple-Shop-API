@@ -24,7 +24,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    @PostMapping("/")
+    @PostMapping()
     public Product saveProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }

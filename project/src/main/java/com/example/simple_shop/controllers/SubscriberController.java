@@ -24,7 +24,7 @@ public class SubscriberController {
  
     private SubscriberService subscriberService;
 
-    @PostMapping("/")
+    @PostMapping()
     public Subscriber saveSubscriber(@RequestBody Subscriber subscriber) {
         return subscriberService.saveSubscriber(subscriber);
     }

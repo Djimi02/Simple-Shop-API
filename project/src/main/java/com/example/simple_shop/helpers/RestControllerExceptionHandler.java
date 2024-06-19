@@ -17,7 +17,7 @@ public class RestControllerExceptionHandler {
     @ExceptionHandler(value = {IllegalArgumentException.class, RuntimeException.class})
     protected ResponseEntity<Object> handleConflict(Exception ex) {
         String bodyOfResponse = null;
-        if (ex instanceof IllegalAccessException) { // One of my exceptions
+        if (ex instanceof IllegalArgumentException) { // One of my exceptions
             bodyOfResponse = ex.getMessage();
         } else { // Any other
             bodyOfResponse = "Unexpected exception occurred!";

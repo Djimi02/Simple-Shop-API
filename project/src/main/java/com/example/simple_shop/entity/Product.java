@@ -32,7 +32,7 @@ public class Product {
     private Date creationDate;
 
     @Column(nullable = false)
-    private boolean isAvailable;
+    private Boolean isAvailable;
 
     @ManyToMany(mappedBy = "subscribedProducts", fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private List<Subscriber> subscibers = new ArrayList<>();
