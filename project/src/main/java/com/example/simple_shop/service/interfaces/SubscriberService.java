@@ -2,6 +2,7 @@ package com.example.simple_shop.service.interfaces;
 
 import java.util.List;
 
+import com.example.simple_shop.entity.Product;
 import com.example.simple_shop.entity.Subscriber;
 
 public interface SubscriberService {
@@ -35,13 +36,13 @@ public interface SubscriberService {
     public void addProductToSubscriber(Long subscriberID, Long productID);
 
     /**
-     * Retrieves all subscribers subscribed to a particular product.
-     * 
-     * @param productID the ID of the product whose subscribers are to be retrieved.
-     * @return a list of Subscribers who are subscribed to the specified product.
-     * @throws IllegalArgumentException if the product ID is null.
+     * Retrieves all products subscribed to by the subscriber specified with the input id.
+     *
+     * @param subscriberID the ID of the subscriber whose products are to be retrieved.
+     * @return a list of Products subscribed to by the specified subscriber.
+     * @throws IllegalArgumentException if the subscriber ID is null.
      */
-    public List<Subscriber> getSubsribersByProductID(Long productID);
+    public List<Product> getProductsBySubscriberID(Long subsctriberID);
 
     /**
      * Updates the information of an existing subscriber in the database.

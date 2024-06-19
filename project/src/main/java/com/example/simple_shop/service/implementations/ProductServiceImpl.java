@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.simple_shop.entity.Product;
+import com.example.simple_shop.entity.Subscriber;
 import com.example.simple_shop.repository.ProductRepository;
 import com.example.simple_shop.service.interfaces.ProductService;
 
@@ -42,12 +43,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsBySubscriberID(Long subsctriberID) {
-        if (subsctriberID == null) {
-            throw new IllegalArgumentException("Subscriber ID cannot be null");
+    public List<Subscriber> getSubsribersByProductID(Long productID) {
+        if (productID == null) {
+            throw new IllegalArgumentException("Product ID cannot be null!");
         }
 
-        return prodRepo.getProductsBySubscriberID(subsctriberID);
+        return prodRepo.getSubsribersByProductID(productID);
     }
 
     @Override

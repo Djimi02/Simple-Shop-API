@@ -62,12 +62,12 @@ public class SubscriberServiceImpl implements SubscriberService {
     }
 
     @Override
-    public List<Subscriber> getSubsribersByProductID(Long productID) {
-        if (productID == null) {
-            throw new IllegalArgumentException("Product ID cannot be null!");
+    public List<Product> getProductsBySubscriberID(Long subsctriberID) {
+        if (subsctriberID == null) {
+            throw new IllegalArgumentException("Subscriber ID cannot be null");
         }
 
-        return subRepo.getSubsribersByProductID(productID);
+        return subRepo.getProductsBySubscriberID(subsctriberID);
     }
 
     @Override

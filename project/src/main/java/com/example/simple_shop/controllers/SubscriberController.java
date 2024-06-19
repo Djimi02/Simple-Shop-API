@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.simple_shop.entity.Product;
 import com.example.simple_shop.entity.Subscriber;
 import com.example.simple_shop.service.interfaces.SubscriberService;
 
@@ -39,8 +40,8 @@ public class SubscriberController {
     }
 
     @GetMapping("/{subscriberID}/products")
-    public List<Subscriber> getSubsribersByProductID(Long productID) {
-        return subscriberService.getSubsribersByProductID(productID);
+    public List<Product> getProductsBySubscriberID(@PathVariable("subscriberID") Long subsctriberID) {
+        return subscriberService.getProductsBySubscriberID(subsctriberID);
     }
 
     @PutMapping("/{subscriberID}")

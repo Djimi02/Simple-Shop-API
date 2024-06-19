@@ -9,12 +9,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.simple_shop.entity.Product;
+import com.example.simple_shop.entity.Subscriber;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     
-    @Query("SELECT p FROM Product p JOIN p.subscibers s WHERE s.id = :subsctriberID")
-    public List<Product> getProductsBySubscriberID(@Param("subsctriberID") Long subsctriberID);
+    @Query("SELECT s FROM Subscriber s JOIN s.subscribedProducts p WHERE p.id = :productID")
+    List<Subscriber> getSubsribersByProductID(@Param("productID") Long productID);
 
     @Modifying
     @Query(

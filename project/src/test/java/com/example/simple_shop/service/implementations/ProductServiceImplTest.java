@@ -106,33 +106,33 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    void testGetProductsBySubscriberIDCorrect() {
-        Subscriber subscriber = createAndSaveValidSubscriber();
+    void testGetSubsribersByProductIDCorrect() {
+        Product product = createAndSaveValidProduct();
 
-        Product product1 = createAndSaveValidProduct();
-        Product product2 = createAndSaveValidProduct();
+        Subscriber subscriber1 = createAndSaveValidSubscriber();
+        Subscriber subscriber2 = createAndSaveValidSubscriber();
 
         // Update data
-        subscriberService.addProductToSubscriber(subscriber.getId(), product1.getId());
-        subscriberService.addProductToSubscriber(subscriber.getId(), product2.getId());
+        subscriberService.addProductToSubscriber(subscriber1.getId(), product.getId());
+        subscriberService.addProductToSubscriber(subscriber2.getId(), product.getId());
 
-        // Retrieve data
-        List<Product> productsBySubscriberID = service.getProductsBySubscriberID(subscriber.getId());
+        // Retrieve data from db
+        List<Subscriber> subsribersByProductID = service.getSubsribersByProductID(product.getId());
 
         // Check
-        assertTrue(productsBySubscriberID.size() == 2);
+        assertTrue(subsribersByProductID.size() == 2);
 
-        // Delete products and subscriber after test
-        service.deleteProductByID(product1.getId());
-        service.deleteProductByID(product2.getId());
-        subscriberService.deleteSubscriberByID(subscriber.getId());
+        // Delete product and subscribers after test
+        service.deleteProductByID(product.getId());
+        subscriberService.deleteSubscriberByID(subscriber1.getId());
+        subscriberService.deleteSubscriberByID(subscriber2.getId());
     }
 
     @Test
-    void testGetProductsBySubscriberIDIncorrect() {
+    void testGetSubsribersByProductIDIncorrect() {
         // Null product id
         try {
-            service.getProductsBySubscriberID(null);
+            service.getSubsribersByProductID(null);
             // Should have thrown exception
             assertTrue(false);
         } catch (IllegalArgumentException e) {
@@ -143,9 +143,9 @@ public class ProductServiceImplTest {
             assertTrue(false);
         }
 
-        // Test with non-existing subscriber
-        List<Product> productsBySubscriberID = service.getProductsBySubscriberID(-1l);
-        assertTrue(productsBySubscriberID.size() == 0);
+        // Testing with non-existing product
+        List<Subscriber> subsribersByProductID = service.getSubsribersByProductID(-1l);
+        assertTrue(subsribersByProductID.size() == 0);
     }
 
     private Subscriber createAndSaveValidSubscriber() {
