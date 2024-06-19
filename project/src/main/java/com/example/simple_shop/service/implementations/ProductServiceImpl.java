@@ -88,14 +88,5 @@ public class ProductServiceImpl implements ProductService {
             throw new IllegalArgumentException("Product name cannot be null!");
         }
     }
-
-    @Override
-    public boolean productExistsByID(Long productID) {
-        if (productID == null) {
-            throw new IllegalArgumentException("Product ID cannot be null!");
-        }
-
-        return prodRepo.existsById(productID);
-    }
     
 }

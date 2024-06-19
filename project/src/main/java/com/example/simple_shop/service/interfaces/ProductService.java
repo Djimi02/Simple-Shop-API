@@ -16,6 +16,4 @@ public interface ProductService {
 
     public void deleteProductByID(Long productID);
 
-    public boolean productExistsByID(Long productID);
-
 }

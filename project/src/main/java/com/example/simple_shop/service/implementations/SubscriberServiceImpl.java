@@ -108,13 +108,4 @@ public class SubscriberServiceImpl implements SubscriberService {
         }
     }
 
-    @Override
-    public boolean subscriberExistsByID(Long subscriberID) {
-        if (subscriberID == null) {
-            throw new IllegalArgumentException("Subscriber ID cannot be null!");
-        }
-
-        return subRepo.existsById(subscriberID);
-    }
-
 }
