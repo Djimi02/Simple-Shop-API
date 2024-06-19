@@ -1,4 +1,4 @@
-package com.example.simple_shop.repository;
+package com.example.simple_shop.repositories;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.simple_shop.entity.Subscriber;
+import com.example.simple_shop.entities.Subscriber;
 
 @SpringBootTest
 public class SubscriberRepositoryTest {

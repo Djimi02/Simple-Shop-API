@@ -1,4 +1,4 @@
-package com.example.simple_shop.service.implementations;
+package com.example.simple_shop.services.implementations;
 
 import java.util.Date;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.simple_shop.entity.Product;
-import com.example.simple_shop.repository.ProductRepository;
-import com.example.simple_shop.repository.SubscriberRepository;
-import com.example.simple_shop.service.interfaces.AuditService;
+import com.example.simple_shop.entities.Product;
+import com.example.simple_shop.repositories.ProductRepository;
+import com.example.simple_shop.repositories.SubscriberRepository;
+import com.example.simple_shop.services.interfaces.AuditService;
 
 import lombok.AllArgsConstructor;
 

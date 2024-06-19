@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.simple_shop.entity.Product;
-import com.example.simple_shop.service.interfaces.AuditService;
+import com.example.simple_shop.entities.Product;
+import com.example.simple_shop.services.interfaces.AuditService;
 
 import lombok.AllArgsConstructor;
 

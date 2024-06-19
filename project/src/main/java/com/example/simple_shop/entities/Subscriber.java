@@ -1,4 +1,4 @@
-package com.example.simple_shop.entity;
+package com.example.simple_shop.entities;
 
 import java.util.ArrayList;
 import java.util.Date;

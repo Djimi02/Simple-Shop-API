@@ -1,9 +1,9 @@
-package com.example.simple_shop.service.interfaces;
+package com.example.simple_shop.services.interfaces;
 
 import java.util.List;
 
-import com.example.simple_shop.entity.Product;
-import com.example.simple_shop.entity.Subscriber;
+import com.example.simple_shop.entities.Product;
+import com.example.simple_shop.entities.Subscriber;
 
 public interface ProductService {
  

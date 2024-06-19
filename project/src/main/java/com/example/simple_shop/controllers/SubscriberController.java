@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.simple_shop.entity.Product;
-import com.example.simple_shop.entity.Subscriber;
-import com.example.simple_shop.service.interfaces.SubscriberService;
+import com.example.simple_shop.entities.Product;
+import com.example.simple_shop.entities.Subscriber;
+import com.example.simple_shop.services.interfaces.SubscriberService;
 
 import lombok.AllArgsConstructor;
 

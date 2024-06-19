@@ -1,4 +1,4 @@
-package com.example.simple_shop.service.implementations;
+package com.example.simple_shop.services.implementations;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.simple_shop.entity.Product;
-import com.example.simple_shop.entity.Subscriber;
-import com.example.simple_shop.service.interfaces.ProductService;
-import com.example.simple_shop.service.interfaces.SubscriberService;
+import com.example.simple_shop.entities.Product;
+import com.example.simple_shop.entities.Subscriber;
+import com.example.simple_shop.services.interfaces.ProductService;
+import com.example.simple_shop.services.interfaces.SubscriberService;
 
 @SpringBootTest
 public class ProductServiceImplTest {

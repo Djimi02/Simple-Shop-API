@@ -1,9 +1,9 @@
-package com.example.simple_shop.service.interfaces;
+package com.example.simple_shop.services.interfaces;
 
 import java.util.Date;
 import java.util.List;
 
-import com.example.simple_shop.entity.Product;
+import com.example.simple_shop.entities.Product;
 
 public interface AuditService {
  
