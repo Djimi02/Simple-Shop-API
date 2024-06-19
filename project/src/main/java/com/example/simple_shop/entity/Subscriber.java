@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -35,6 +36,7 @@ public class Subscriber {
     @Column(nullable = false)
     private String lastName;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private Date joinDate;
 
