@@ -22,7 +22,7 @@ public class ProductRepositoryTest {
         Product product = new Product();
         product.setName("pName");
         product.setCreationDate(new Date());
-        product.setAvailable(false);
+        product.setIsAvailable(false);
 
         assertTrue(product.getId() == 0); // default long value
 
