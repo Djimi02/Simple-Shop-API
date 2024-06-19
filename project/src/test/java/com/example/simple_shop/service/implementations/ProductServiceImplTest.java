@@ -163,6 +163,7 @@ public class ProductServiceImplTest {
         // Create new data
         Product product2 = new Product();
         product2.setName("pName2");
+        product2.setIsAvailable(false);
 
         service.updateProduct(prodID, product2);
 

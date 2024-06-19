@@ -150,6 +150,7 @@ public class SubscriberServiceImplTest {
     private Product createAndSaveValidProduct() {
         Product product = new Product();
         product.setName("pName");
+        product.setIsAvailable(true);
         return productService.saveProduct(product);
     }
 
