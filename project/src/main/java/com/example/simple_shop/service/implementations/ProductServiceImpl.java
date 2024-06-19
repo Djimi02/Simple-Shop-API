@@ -50,7 +50,6 @@ public class ProductServiceImpl implements ProductService {
         return prodRepo.getProductsBySubscriberID(subsctriberID);
     }
 
-    @Transactional
     @Override
     public Product updateProduct(Long productID, Product newProductData) {
         if (productID == null) {
@@ -65,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 
         // Update data in db
         dbProd.setName(newProductData.getName());
-        return dbProd;
+        return prodRepo.save(dbProd);
     }
 
     @Transactional
